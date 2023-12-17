@@ -1,8 +1,18 @@
 import React, { useState } from "react";
-import { Button, Input } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { Button, Input, Tooltip } from "antd";
+import {
+    PhoneOutlined,
+    MailOutlined,
+    LinkedinOutlined,
+    GithubOutlined,
+} from "@ant-design/icons";
 import "../styles/Info.css";
+import {
+    EyeOutlined,
+    EditOutlined,
+    UserOutlined,
+    InfoCircleOutlined,
+} from "@ant-design/icons";
 
 function Information() {
     const [edit, setEdit] = useState(true);
@@ -17,13 +27,25 @@ function Information() {
             <div className="thin-ctn">
                 <form>
                     <Input
+                        prefix={<UserOutlined />}
                         type="text"
-                        placeholder="full name"
+                        placeholder="Enter your full name"
                         onChange={(e) => setFullName(e.target.value)}
                         value={fullName}
+                        suffix={
+                            <Tooltip title="use title case">
+                                <InfoCircleOutlined
+                                    style={{
+                                        color: "rgba(0,0,0,.45)",
+                                    }}
+                                />
+                            </Tooltip>
+                        }
+                        className="my-3"
                     />
-                    <p className="container">
+                    <p className="flex flex-row gap-2 my-1 mx-2">
                         <Input
+                            prefix={<PhoneOutlined />}
                             type="tel"
                             placeholder="phone number"
                             onChange={(e) => setPhoneNumber(e.target.value)}
@@ -31,26 +53,34 @@ function Information() {
                         />
                         <Input
                             type="email"
+                            prefix={<MailOutlined />}
                             placeholder="email address"
                             onChange={(e) => setEmailAddress(e.target.value)}
                             value={emailAddress}
                         />
                         <Input
                             type="text"
+                            prefix={<LinkedinOutlined />}
                             placeholder="linkedin profile url"
                             onChange={(e) => setLinkedinProfile(e.target.value)}
                             value={linkedinProfile}
                         />
                         <Input
                             type="text"
+                            prefix={<GithubOutlined />}
                             placeholder="github profile url"
                             onChange={(e) => setGithubProfile(e.target.value)}
                             value={githubProfile}
                         />
                     </p>
                     <div className="center">
-                        <Button onClick={() => setEdit(false)}>
-                            <FontAwesomeIcon icon={faEye} /> &nbsp; View mode
+                        <Button
+                            // icon={<EyeOutlined />}
+                            onClick={() => setEdit(false)}
+                        >
+                            <Tooltip title="view">
+                                <EyeOutlined />
+                            </Tooltip>
                         </Button>
                     </div>
                 </form>
@@ -59,8 +89,10 @@ function Information() {
     } else {
         return (
             <div className="thin-ctn">
-                <h2>{fullName !== "" ? fullName : "Full Name"}</h2>
-                <p className="container">
+                <h1 className="font-bold text-5xl my-2">
+                    {fullName !== "" ? fullName : "Full Name"}
+                </h1>
+                <p className="flex flex-row gap-2 my-3">
                     <span>
                         {phoneNumber !== ""
                             ? phoneNumber + " |"
@@ -107,9 +139,10 @@ function Information() {
                     </span>
                 </p>
                 <div className="center">
-                    <Button onClick={() => setEdit(true)}>
-                        <FontAwesomeIcon icon={faPenToSquare} /> &nbsp; Edit
-                        mode
+                    <Button onClick={() => setEdit(true)} className="my-2">
+                        <Tooltip title="edit">
+                            <EditOutlined />
+                        </Tooltip>
                     </Button>
                 </div>
             </div>

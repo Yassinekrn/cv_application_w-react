@@ -5,9 +5,10 @@ import Experience from "./components/Experience";
 
 function App() {
     return (
-        <div className="border">
+        <div className="">
             <Information />
-            <hr />
+            <hr className="border-t-4 border-gray-300 mx-5" />
+
             <Education />
             <hr />
             <Experience />
